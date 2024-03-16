@@ -3,25 +3,25 @@ import "../style/index.css";
 /**
  *  EDIT ONLY INSIDE THIS RENDER FUNCTION
  *  This function is called every time the user changes types or changes any input
- * 
-    {
-        includeCover: true, // if includeCover is true the algorithm should show the cover image
-        background: "https://images.unsplash.com/photo-1511974035430-5de47d3b95da", // this is the image's url that will be used as a background for the profile cover
-        avatarURL: "https://randomuser.me/api/portraits/women/42.jpg", // this is the url for the profile avatar
-        socialMediaPosition: "right", // social media bar position (left or right)
-        
-        twitter: null, // social media usernames
-        github: null,
-        linkedin: null,
-        instagram: null,
+ **/
+let variables = {
+  includeCover: true, // if includeCover is true the algorithm should show the cover image
+  background: "https://images.unsplash.com/photo-1511974035430-5de47d3b95da", // this is the image's url that will be used as a background for the profile cover
+  avatarURL: "https://randomuser.me/api/portraits/women/42.jpg", // this is the url for the profile avatar
+  socialMediaPosition: "right", // social media bar position (left or right)
 
-        name: null,
-        lastName: null,
-        role: null,
-        country: null,
-        city: null
-    }
- */
+  twitter: null, // social media usernames
+  github: null,
+  linkedin: null,
+  instagram: null,
+
+  name: null,
+  lastName: null,
+  role: null,
+  country: null,
+  city: null
+};
+
 function render(variables = {}) {
   console.log("These are the current variables: ", variables); // print on the console
   // here we ask the logical questions to make decisions on how to build the html
@@ -29,14 +29,44 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
-  // reset the website body with the new html output
+  // reset the website body with the new html output Lucy Boilett
+  let name = variables.name;
+  if (variables.name === null) {
+    name = "Your name and lastname";
+  }
+
+  let lastName = variables.lastName;
+  if (variables.lastName === null) {
+    lastName = ""; // set to an empty string instead of "Your last name"
+  }
+
+  let role = variables.role;
+  if (variables.role === null) {
+    role = "Your role";
+  }
+
+  let city = variables.city;
+  if (variables.city === null) {
+    city = "Your city";
+  }
+
+  let country = variables.country;
+  if (variables.country === null) {
+    country = "Your country";
+  }
+
+  let socialMediaPosition = variables.socialMediaPosition;
+  if (variables.socialMediaPosition === null) {
+    socialMediaPosition = "right";
+  }
+
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
+          <h1>${name} ${lastName}</h1>
+          <h2>${role}</h2>
+          <h3>${city}, ${country}</h3>
+          <ul class="${socialMediaPosition}">
             <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
             <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
             <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
